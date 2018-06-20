@@ -1,14 +1,59 @@
 
-<p-dialog header="Godfather I" [(visible)]="display" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70" 
-[maximizable]="true" [baseZIndex]="10000">
-<span>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
-kind and benevolent to those who give respect,
-but given to ruthless violence whenever anything stands against the good of the family.</span>
+<p-dialog header="Add new sentence" [(visible)]="display" [modal]="true" [responsive]="true" [width]="500" [minWidth]="200" [minY]="70" 
+[maximizable]="true" [baseZIndex]="10000"  [contentStyle]="{'overflow':'visible'}">
+<div>
+  <label for="language">Content:</label>
+  <p-dropdown name="language" 
+              [options]="langs" 
+              [(ngModel)] = "addingSentence.lang">
+  </p-dropdown>
+</div>
+<div>
+    <label for="category">Content:</label>
+    <p-dropdown name="category" 
+                [options]="categories" 
+                [(ngModel)] = "addingSentence.category">
+    </p-dropdown>
+  </div>
+<div>
+  <label for="level">Level</label>
+  <p-rating name="level" 
+            [(ngModel)]="addingSentence.level" 
+            [cancel]="false">
+  </p-rating>
+</div>
+<div>
+  <label for="content">Content:</label>
+  <textarea [rows]="5" 
+            [cols]="30" 
+            name="content" 
+            pInputTextarea 
+            autoResize="autoResize" 
+            [(ngModel)] = "addingSentence.content"></textarea>
+</div>
+<div>
+    <label for="defaultTranslatedContent">Content:</label>
+    <textarea name="defaultTranslatedContent" 
+            [rows]="5" 
+            [cols]="30" 
+            pInputTextarea 
+            autoResize="autoResize" 
+            [(ngModel)] = "addingSentence.content">
+    </textarea>
+</div>
+
+
 <p-footer>
-    <button type="button" pButton icon="pi pi-check" (click)="display=false" label="Yes"></button>
-    <button type="button" pButton icon="pi pi-close" (click)="display=false" label="No"></button>
+    <button type="button" 
+            pButton 
+            icon="pi pi-check" 
+            (click)="onAdd()" 
+            label="Yes">Add</button>
+    <button type="button" 
+            pButton 
+            icon="pi pi-close" 
+            (click)="display=false" 
+            label="No">Discard</button>
 </p-footer>
 </p-dialog>
 <button type="button" (click)="showDialog()" pButton icon="pi pi-info-circle" label="Show">Add</button>

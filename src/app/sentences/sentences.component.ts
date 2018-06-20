@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Sentence } from '../model/sentence.model';
 import { SentencesService } from '../sentences.service';
 import {DialogModule} from 'primeng/dialog';
+import {SelectItem} from 'primeng/api';
+import { Category } from '../enum/category.enum';
+
 
 
 @Component({
@@ -11,9 +14,14 @@ import {DialogModule} from 'primeng/dialog';
 })
 export class SentencesComponent implements OnInit {
   private _sentences: Sentence[];
+  private _addingSentence: Sentence = {};
+  private _langs: SelectItem[];
+  private _categories: SelectItem[] = Category.values();
   display: boolean = false;
-  constructor(service: SentencesService) {
+  constructor(private service: SentencesService) {
     this._sentences = service.getSentences();
+    this._langs = service.getLangs();
+
   }
 
   ngOnInit() {
@@ -24,10 +32,27 @@ export class SentencesComponent implements OnInit {
     return this._sentences;
   }
 
+  get addingSentence(){
+    return this._addingSentence;
+  }
+
+  get langs(){
+    return this._langs;
+  }
+
+  get categories(){
+    return this._categories;
+  }
   addSentence(sentence: Sentence){
     this._sentences.splice(0, 0, sentence);
   }
   showDialog(){
     this.display = !this.display;
+  }
+  onAdd(){
+   this.service.fromTracau();
+    this._sentences.splice(0, 0, this._addingSentence);
+    this._addingSentence = {};
+    this.display = false;
   }
 }

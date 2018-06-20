@@ -9,6 +9,15 @@ import { SentencesComponent } from './sentences/sentences.component';
 import { SentencesService } from './sentences.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DialogModule } from 'primeng/dialog';
+import {DropdownModule} from 'primeng/dropdown';
+import { FormsModule } from '@angular/forms';
+import {CardModule} from 'primeng/card';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {RatingModule} from 'primeng/rating';
+import { TracauService } from './tracau.service';
+import { HttpClient, HttpHandler, HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+
+import { HttpModule } from '@angular/http';
 
 
 
@@ -22,10 +31,20 @@ import { DialogModule } from 'primeng/dialog';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    DialogModule
+    FormsModule,
+    HttpModule,
+    HttpClientModule,
+    HttpClientJsonpModule,
+    DialogModule,
+    DropdownModule,
+    CardModule,
+    InputTextareaModule,
+    RatingModule
   ],
   providers: [
-    SentencesService
+    SentencesService,
+    TracauService,
+    
   ],
   bootstrap: [AppComponent],
   

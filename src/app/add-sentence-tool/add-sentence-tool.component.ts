@@ -44,6 +44,7 @@ export class AddSentenceToolComponent implements OnInit {
     return this._categories;
   }
   addSentence(sentence: Sentence){
+    this.service.addSentence(sentence);
     this._sentences.splice(0, 0, sentence);
   }
   get searchContent(){
@@ -62,8 +63,9 @@ export class AddSentenceToolComponent implements OnInit {
     });
   }
 
-  onSave(item: Sentence){
-    this.deleteItem(item);
+  onSave(sentence: Sentence){
+    this.service.addSentence(sentence);
+    this.deleteItem(sentence);
   }
 
   onDiscard(item: Sentence){

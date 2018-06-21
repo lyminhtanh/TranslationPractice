@@ -26,7 +26,10 @@ export class SentencesComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    setInterval(() => {
+      this._sentences = this.service.getSentences();
+      console.log(this._sentences.length);
+    },5000);
   }
 
   get sentences() {
@@ -61,6 +64,9 @@ export class SentencesComponent implements OnInit {
    // this._sentences.splice(0, 0, this._addingSentence);
     //this._addingSentence = {};
     this.display = false;
+  }
+  fetch(){
+    this._sentences = this.service.getSentences();
   }
   private addToList(result){
     console.log('result: '+result);

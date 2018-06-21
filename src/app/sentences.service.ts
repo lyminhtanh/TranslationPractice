@@ -36,7 +36,6 @@ export class SentencesService implements AbstractSentenceService{
     }
   ];
   addSentence(sentence: Sentence){
-    
     this.sentences.splice(0, 0, sentence);
   }
 

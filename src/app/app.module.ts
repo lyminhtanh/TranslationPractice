@@ -18,6 +18,7 @@ import { TracauService } from './tracau.service';
 import { HttpClient, HttpHandler, HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 
 import { HttpModule } from '@angular/http';
+import { AddSentenceToolComponent } from './add-sentence-tool/add-sentence-tool.component';
 
 
 
@@ -26,7 +27,8 @@ import { HttpModule } from '@angular/http';
     AppComponent,
     SentenceComponent,
     TranslatedContentComponent,
-    SentencesComponent
+    SentencesComponent,
+    AddSentenceToolComponent
   ],
   imports: [
     BrowserModule,

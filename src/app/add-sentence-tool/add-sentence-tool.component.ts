@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Sentence } from '../model/sentence.model';
-import { SentencesService } from '../sentences.service';
-import {DialogModule} from 'primeng/dialog';
-import {SelectItem} from 'primeng/api';
+import { SelectItem } from 'primeng/api';
 import { Category } from '../enum/category.enum';
+import { SentencesService } from '../sentences.service';
 import { TracauLang } from '../tracau.service';
 
-
-
 @Component({
-  selector: 'app-sentences',
-  templateUrl: './sentences.component.html',
-  styleUrls: ['./sentences.component.css']
+  selector: 'app-add-sentence-tool',
+  templateUrl: './add-sentence-tool.component.html',
+  styleUrls: ['./add-sentence-tool.component.css']
 })
-export class SentencesComponent implements OnInit {
+export class AddSentenceToolComponent implements OnInit {
+
   private _sentences: Sentence[];
   private _addingSentence: Sentence = {};
   private _langs: SelectItem[];
   private _categories: SelectItem[] = Category.values();
+  private _searchContent: string;
   display: boolean = false;
   constructor(private service: SentencesService) {
     this._sentences = service.getSentences();
@@ -47,21 +46,34 @@ export class SentencesComponent implements OnInit {
   addSentence(sentence: Sentence){
     this._sentences.splice(0, 0, sentence);
   }
-  showDialog(){
-    this.display = !this.display;
+  get searchContent(){
+    return this._searchContent;
   }
 
-  onAdd(){
-    this.service.fromTracau('silkworm').subscribe(
+  isHighlight(item: Sentence){
+    return this.sentences.indexOf(item)%2 === 0;
+  }
+  search(){
+    console.log('searchContent: '+this._searchContent);
+    this.service.fromTracau(this._searchContent).subscribe(
       result => {
         console.log('fromtracau: '+result);
         this.addToList(result);
-      });
-    //console.log(tracauResult);
-   // this._sentences.splice(0, 0, this._addingSentence);
-    //this._addingSentence = {};
-    this.display = false;
+    });
   }
+
+  onSave(item: Sentence){
+    this.deleteItem(item);
+  }
+
+  onDiscard(item: Sentence){
+    this.deleteItem(item);
+  }
+  private deleteItem(item: Sentence) {
+    let index = this.sentences.indexOf(item);
+    this.sentences.splice(index, 1);
+  }
+
   private addToList(result){
     console.log('result: '+result);
     result.forEach((object:TracauResponse) => {
@@ -77,10 +89,13 @@ export class SentencesComponent implements OnInit {
     })
   }
 }
+
 interface TracauResponse{
     '_id'?: string;
     'fields'?: {
       en: string;
-      vi: string;
+      vi: string; 
     }
 }
+
+

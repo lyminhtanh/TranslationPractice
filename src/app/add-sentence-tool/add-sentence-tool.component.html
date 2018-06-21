@@ -1,0 +1,29 @@
+
+<div>
+  <input name="searchContent" 
+    placeholder="please input keyword in english" 
+    [(ngModel)]="_searchContent"
+    type="text">
+  <button type="button" 
+    (click)="search()" 
+    pButton icon="pi pi-info-circle" 
+    label="Search sentences...">Search</button>
+</div>
+
+
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let sentence of sentences">
+    <div [class.isHighlight]="isHighlight(sentence)" class="sentenceItem">
+      <div class="content">
+        <h4 style="color: blue">{{sentence.lang}} | {{sentence.content}} </h4>
+        <h4>{{sentence.translatedContent}}</h4>
+      </div>
+      <div class="action">
+          <button type="button" (click)="onSave(sentence)" pButton icon="pi pi-info-circle">Add</button>
+          <button type="button" (click)="onDiscard(sentence)" pButton icon="pi pi-info-circle">Discard</button>
+      </div>
+      
+    </div>
+  </li>
+</ul>
+

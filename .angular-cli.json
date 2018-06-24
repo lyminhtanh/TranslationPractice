@@ -5,8 +5,9 @@
   },
   "apps": [
     {
+      "platform": "browser",
       "root": "src",
-      "outDir": "dist",
+      "outDir": "dist/browser",
       "assets": [
         "assets",
         "favicon.ico"
@@ -26,6 +27,20 @@
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
+      }
+    },
+    {
+      "name": "universal",
+      "platform": "server",
+      "root": "src",
+      "outDir": "dist/server",
+      "main": "main.server.ts",
+      "tsconfig": "tsconfig.server.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+          "dev": "environments/environment.ts",
+          "prod": "environments/environment.prod.ts"
       }
     }
   ],

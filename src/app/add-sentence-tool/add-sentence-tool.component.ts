@@ -51,6 +51,9 @@ export class AddSentenceToolComponent implements OnInit {
     return this._searchContent;
   }
 
+  set searchContent(content:string){
+    this._searchContent = content;
+  }
   isHighlight(item: Sentence){
     return this.sentences.indexOf(item)%2 === 0;
   }

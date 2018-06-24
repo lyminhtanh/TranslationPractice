@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'English Translation Practice App';
+  constructor(){
+    console.log('go to app comp!!');
+  }
+  log(){
+    console.log('ahihihihihihih click!!');
+  }
 }
